@@ -1,4 +1,5 @@
 # DURC
+
 DURC is reverse CRUD
 
 DURC is an artisan console command that builds Laravel Eloquent models and views by reading from the database assuming the DB follows some rules.
