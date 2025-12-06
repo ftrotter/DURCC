@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use CareSet\DURC;
+use ftrotter\DURC;
 
 final class SignatureTest  extends TestCase
 {
@@ -22,7 +22,7 @@ final class SignatureTest  extends TestCase
 	
 		$whole_file_contents = file_get_contents(__DIR__."/testfile.naked.php");
 
-		$signature = \CareSet\DURC\Signature::calculate_signature_from_phpfile_string($whole_file_contents);
+		$signature = \ftrotter\DURC\Signature::calculate_signature_from_phpfile_string($whole_file_contents);
 
 	        $this->assertEquals(
 			$stub_md5,
@@ -38,7 +38,7 @@ final class SignatureTest  extends TestCase
 
 		$whole_file_contents = file_get_contents(__DIR__."/testfile.signed.unchanged.php");
 		
-		$has_changed = \CareSet\DURC\Signature::has_signed_file_changed($whole_file_contents);
+		$has_changed = \ftrotter\DURC\Signature::has_signed_file_changed($whole_file_contents);
 	
 		$this->assertEquals(
 			$has_changed,
@@ -55,7 +55,7 @@ final class SignatureTest  extends TestCase
 
 		$whole_file_contents = file_get_contents(__DIR__."/testfile.signed.changed.php");
 		
-		$has_changed = \CareSet\DURC\Signature::has_signed_file_changed($whole_file_contents);
+		$has_changed = \ftrotter\DURC\Signature::has_signed_file_changed($whole_file_contents);
 	
 		$this->assertEquals(
 			$has_changed,
@@ -73,11 +73,11 @@ final class SignatureTest  extends TestCase
 	{
 
 		$whole_file_contents = file_get_contents(__DIR__."/testfile.naked.php");
-		$signed_file = \CareSet\DURC\Signature::sign_phpfile_string($whole_file_contents);
+		$signed_file = \ftrotter\DURC\Signature::sign_phpfile_string($whole_file_contents);
 
 		//echo "\n#### signed file\n$signed_file\n#######\n";
 	
-		$has_changed = \CareSet\DURC\Signature::has_signed_file_changed($signed_file);
+		$has_changed = \ftrotter\DURC\Signature::has_signed_file_changed($signed_file);
 
 		$this->assertEquals(
 			$has_changed,

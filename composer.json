@@ -1,5 +1,5 @@
 {
-    "name": "ftrotter/durc",
+    "name": "ftrotter/durcc",
     "description": "DURC is reverse CRUD",
     "type": "library",
     "license": "MIT",
@@ -10,7 +10,7 @@
 		"mysql",
 		"mariadb"
     ],
-    "homepage": "https://github.com/ftrotter/DURC",
+    "homepage": "https://github.com/ftrotter/DURCC",
     "authors": [
         {
             "name": "Fred Trotter",
@@ -30,11 +30,11 @@
     },
     "psr-4": {
             "App\\": "app/",
-            "ftrotter\\DURC\\": "packages/ftrotter/durc/src"
+            "CareSet\\DURC\\": "packages/CareSet/durc/src"
     },
     "autoload": {
 	"psr-4": {
-		"ftrotter\\DURC\\": "src/"
+		"CareSet\\DURC\\": "src/"
 	}
     },
     "post-update-cmd": [
@@ -43,7 +43,7 @@
 	"extra": {
 		"laravel": {
 			"providers": [
-				"ftrotter\\DURC\\DURCServiceProvider"
+				"CareSet\\DURC\\DURCServiceProvider"
 			]
 		}
 	},

@@ -11,7 +11,7 @@ DURC:write will use the configuration file to generate basic CRUD components for
 Via Composer
 
 ```bash
-$ composer require careset/durc:dev-master
+$ composer require ftrotter/durcc:dev-main
 ```
 
 Eventually we will release a stable, non-alpha version. But for now you will have to accept alpha code.
@@ -176,5 +176,3 @@ You have to copy the default .env.example into .env and run
 ```bash
 $ php artisan key:generate
 ```
-
-
