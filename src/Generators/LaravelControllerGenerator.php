@@ -5,12 +5,12 @@
 
 
 */
-namespace ftrotter\DURC\Generators;
+namespace CareSet\DURC\Generators;
 
-use ftrotter\DURC\DURC;
-use ftrotter\DURC\Signature;
+use CareSet\DURC\DURC;
+use CareSet\DURC\Signature;
 
-class LaravelControllerGenerator extends \ftrotter\DURC\DURCGenerator {
+class LaravelControllerGenerator extends \CareSet\DURC\DURCGenerator {
 
 
         public static function start(
@@ -106,10 +106,10 @@ namespace App\DURC\Controllers;
 
 use App\\$class_name;
 use Illuminate\Http\Request;
-use ftrotter\DURC\DURC;
-use ftrotter\DURC\DURCController;
+use CareSet\DURC\DURC;
+use CareSet\DURC\DURCController;
 use Illuminate\Support\Facades\View;
-use ftrotter\DURC\DURCInvalidDataException;
+use CareSet\DURC\DURCInvalidDataException;
 
 class $class_name"."Controller extends DURCController
 {

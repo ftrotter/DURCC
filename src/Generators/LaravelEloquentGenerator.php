@@ -5,13 +5,13 @@
 
 
 */
-namespace ftrotter\DURC\Generators;
+namespace CareSet\DURC\Generators;
 
-use ftrotter\DURC\DURC;
-use ftrotter\DURC\Signature;
+use CareSet\DURC\DURC;
+use CareSet\DURC\Signature;
 use Illuminate\Support\Str;
 
-class LaravelEloquentGenerator extends \ftrotter\DURC\DURCGenerator {
+class LaravelEloquentGenerator extends \CareSet\DURC\DURCGenerator {
 
         public static function start(
 							$db_config,
@@ -352,8 +352,8 @@ class LaravelEloquentGenerator extends \ftrotter\DURC\DURCGenerator {
 
 namespace $model_namespace\DURC\Models;
 $soft_delete_code_use_statememt
-use ftrotter\DURC\DURCModel;
-use ftrotter\DURC\DURC;
+use CareSet\DURC\DURCModel;
+use CareSet\DURC\DURC;
 //use Owen It\Auditing\Contracts\Auditable;
 /*
 	Note this class was auto-generated from 

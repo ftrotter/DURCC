@@ -3,12 +3,12 @@
 	This makes the mustache form for creating and updating the DURC record
 
 */
-namespace ftrotter\DURC\Generators;
+namespace CareSet\DURC\Generators;
 
-use ftrotter\DURC\DURC;
+use CareSet\DURC\DURC;
 use Illuminate\Support\Str;
 
-class MustacheEditViewGenerator extends \ftrotter\DURC\DURCMustacheGenerator {
+class MustacheEditViewGenerator extends \CareSet\DURC\DURCMustacheGenerator {
 
 
         public static function start(

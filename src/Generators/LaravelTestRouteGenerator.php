@@ -2,16 +2,16 @@
 /*
 	TODO add description of the purpose of this file
 */
-namespace ftrotter\DURC\Generators;
+namespace CareSet\DURC\Generators;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\DB;
-use ftrotter\DURC\DURC;
+use CareSet\DURC\DURC;
 
-class LaravelTestRouteGenerator extends \ftrotter\DURC\DURCGenerator {
+class LaravelTestRouteGenerator extends \CareSet\DURC\DURCGenerator {
 
 
 
