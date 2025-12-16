@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 /*
 	This abstract class details exactly how a generator is supposed to work
 	Each generators compiles from the database to a different type of
-	output... some create views, others creat zermelo reports
+	output... some create views, others creat zzermelo reports
 	still others make eloquent parent/child objects
 */
 abstract class DURCCGenerator{

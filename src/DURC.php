@@ -152,7 +152,7 @@ ORDER BY `TABLE_NAME`,`ORDINAL_POSITION`
 				$durc_listing = new \stdClass;
 				$durc_listing->label = $durc_string;
 				$durc_listing->create_url = $create_url;
-				$list_url = "/Zermelo/DURCC_$durc_string";
+				$list_url = "/ZZermelo/DURCC_$durc_string";
 				$durc_listing->list_url = $list_url;
 				$return_me[$durc_string] = $durc_listing;
 			}

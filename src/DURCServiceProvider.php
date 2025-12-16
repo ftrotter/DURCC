@@ -4,7 +4,7 @@ namespace ftrotter\DURCC;
 
 use Illuminate\Support\ServiceProvider;
 
-class DURCServiceProvider extends ServiceProvider
+class DURCCServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.

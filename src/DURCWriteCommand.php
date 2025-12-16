@@ -35,7 +35,7 @@ class DURCCWriteCommand extends Command{
 			'Test Routes' =>		'ftrotter\DURCC\Generators\LaravelTestRouteGenerator',	
 			'Mustache Menu' => 		'ftrotter\DURCC\Generators\MustacheMenuGenerator',	
 			'MySQLDump' => 			'ftrotter\DURCC\Generators\MySQLDumpGenerator',	
-			'Zermelo Index' => 		'ftrotter\DURCC\Generators\ZermeloIndexGenerator',
+			'ZZermelo Index' => 		'ftrotter\DURCC\Generators\ZZermeloIndexGenerator',
 
 		];
 

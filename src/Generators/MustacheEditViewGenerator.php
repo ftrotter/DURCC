@@ -128,7 +128,7 @@ $delete_alert_code
   <div class='card-header'>
 <h4> {{durc_instance_name}}</h4>
 <ul>
-<li> <a href='/Zermelo/DURCC_$class_name/'>Return to $class_name list</a> </li>
+<li> <a href='/ZZermelo/DURCC_$class_name/'>Return to $class_name list</a> </li>
 {{^is_new}}
 <li> <a href='$URLroot$class_name/create'>Create new $class_name </a> </li>
 {{/is_new}}

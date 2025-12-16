@@ -98,7 +98,7 @@ $paging_widget = "
 
 		$template_text = "
 <h1>$class_name list </h1>
-<h3> <a href='/Zermelo/DURCC_$class_name'>Zermelo $class_name Report</a></h3>
+<h3> <a href='/ZZermelo/DURCC_$class_name'>ZZermelo $class_name Report</a></h3>
 Create <a href='$URLroot$class_name/create/'>new $class_name</a><br>
 
 $paging_widget

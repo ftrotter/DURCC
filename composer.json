@@ -43,7 +43,7 @@
 	"extra": {
 		"laravel": {
 			"providers": [
-				"ftrotter\\DURCC\\DURCServiceProvider"
+				"ftrotter\\DURCC\\DURCCServiceProvider"
 			]
 		}
 	},
