@@ -3,12 +3,12 @@
 	TODO document this experiment or remove it.
 
 */
-namespace CareSet\DURC\Generators;
+namespace ftrotter\DURCC\Generators;
 
-use CareSet\DURC\DURC;
-use CareSet\DURC\Signature;
+use ftrotter\DURCC\DURC;
+use ftrotter\DURCC\Signature;
 
-class experiment_LaravelControllerGenerator extends \CareSet\DURC\DURCGenerator {
+class experiment_LaravelControllerGenerator extends \ftrotter\DURCC\DURCGenerator {
 
 
         public static function start(
@@ -91,8 +91,8 @@ namespace App\DURC\Controllers;
 
 use App\\$class_name;
 use Illuminate\Http\Request;
-use CareSet\DURC\DURC;
-use CareSet\DURC\DURCController;
+use ftrotter\DURCC\DURC;
+use ftrotter\DURCC\DURCController;
 use Illuminate\Support\Facades\View;
 
 class $class_name"."Controller extends DURCController

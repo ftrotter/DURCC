@@ -1,6 +1,6 @@
 <?php
 
-namespace CareSet\DURC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Support\ServiceProvider;
 

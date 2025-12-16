@@ -5,7 +5,7 @@
 
 
 */
-namespace CareSet\DURC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -22,20 +22,20 @@ class DURCWriteCommand extends Command{
 	$is_debug = false;
 
 	$firstPhaseGenerators = [
-			'Eloquent Models' => 		'CareSet\DURC\Generators\LaravelEloquentGenerator',
+			'Eloquent Models' => 		'ftrotter\DURCC\Generators\LaravelEloquentGenerator',
 		];
 
 	//second phase generators get the benifit of actually using the first-generation generators 
 	//in their results... 	
 	$secondPhaseGenerators = [
-			'Web Controllers' => 		'CareSet\DURC\Generators\LaravelControllerGenerator',
-			'Mustache Edit Views' =>	'CareSet\DURC\Generators\MustacheEditViewGenerator',
-			'Mustache Index Page' => 	'CareSet\DURC\Generators\MustacheIndexViewGenerator',
-			'Laravel Routes' => 		'CareSet\DURC\Generators\LaravelRouteGenerator',	
-			'Test Routes' =>		'CareSet\DURC\Generators\LaravelTestRouteGenerator',	
-			'Mustache Menu' => 		'CareSet\DURC\Generators\MustacheMenuGenerator',	
-			'MySQLDump' => 			'CareSet\DURC\Generators\MySQLDumpGenerator',	
-			'Zermelo Index' => 		'CareSet\DURC\Generators\ZermeloIndexGenerator',
+			'Web Controllers' => 		'ftrotter\DURCC\Generators\LaravelControllerGenerator',
+			'Mustache Edit Views' =>	'ftrotter\DURCC\Generators\MustacheEditViewGenerator',
+			'Mustache Index Page' => 	'ftrotter\DURCC\Generators\MustacheIndexViewGenerator',
+			'Laravel Routes' => 		'ftrotter\DURCC\Generators\LaravelRouteGenerator',	
+			'Test Routes' =>		'ftrotter\DURCC\Generators\LaravelTestRouteGenerator',	
+			'Mustache Menu' => 		'ftrotter\DURCC\Generators\MustacheMenuGenerator',	
+			'MySQLDump' => 			'ftrotter\DURCC\Generators\MySQLDumpGenerator',	
+			'Zermelo Index' => 		'ftrotter\DURCC\Generators\ZermeloIndexGenerator',
 
 		];
 

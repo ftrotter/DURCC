@@ -1,6 +1,6 @@
 <?php
 
-namespace CareSet\DURC;
+namespace ftrotter\DURCC;
 
 class DURCInvalidDataException extends \Exception
 {

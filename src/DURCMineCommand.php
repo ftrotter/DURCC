@@ -7,7 +7,7 @@
 	and export them as json files
 
 */
-namespace CareSet\DURC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
