@@ -202,7 +202,7 @@ LEFT JOIN $to_db.$to_table AS $to_table_alias ON
 	
 		$report_php_code = "<?php
 namespace App\Reports;
-use CareSet\Zermelo\Reports\Tabular\AbstractTabularReport;
+use ftrotter\ZZermelo\Reports\Tabular\AbstractTabularReport;
 
 class $report_class_name extends AbstractTabularReport
 {

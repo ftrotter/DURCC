@@ -30,7 +30,7 @@
     },
     "psr-4": {
             "App\\": "app/",
-            "ftrotter\\DURCC\\": "packages/CareSet/durc/src"
+            "ftrotter\\DURCC\\": "src"
     },
     "autoload": {
 	"psr-4": {
