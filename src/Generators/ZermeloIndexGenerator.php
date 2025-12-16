@@ -3,17 +3,17 @@
 	This is the new ZZermelo index, which is better in every way than the current mustache index
 
 */
-namespace ftrotter\DURCCC\Generators;
+namespace ftrotter\DURCC\Generators;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\DB;
-use ftrotter\DURCCC\DURCC;
-use ftrotter\DURCCC\Signature;
+use ftrotter\DURCC\DURCC;
+use ftrotter\DURCC\Signature;
 
-class ZZermeloIndexGenerator extends \ftrotter\DURCCC\DURCCGenerator {
+class ZZermeloIndexGenerator extends \ftrotter\DURCC\DURCCGenerator {
 
 
         //Run only once at the end of generation

@@ -1,10 +1,10 @@
 <?php
 
-namespace ftrotter\DURCCC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Support\ServiceProvider;
 
-class DURCCServiceProvider extends ServiceProvider
+class DURCServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -30,7 +30,7 @@ class DURCCServiceProvider extends ServiceProvider
         ]);
 
             $this->commands([
-                DURCCCommand::class,
+                DURCCommand::class,
                 DURCCMineCommand::class,
                 DURCCWriteCommand::class,
             ]);

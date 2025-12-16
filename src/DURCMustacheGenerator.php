@@ -1,11 +1,11 @@
 <?php
-namespace ftrotter\DURCCC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\DB;
-use ftrotter\DURCCC\DURCC;
+use ftrotter\DURCC\DURCC;
 /*
 	All of the mostache generators will need shared functions.
 	Ways to generate basic html components, using bootstrap

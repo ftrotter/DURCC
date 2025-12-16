@@ -5,7 +5,7 @@
 
 
 */
-namespace ftrotter\DURCCC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -22,20 +22,20 @@ class DURCCWriteCommand extends Command{
 	$is_debug = false;
 
 	$firstPhaseGenerators = [
-			'Eloquent Models' => 		'ftrotter\DURCCC\Generators\LaravelEloquentGenerator',
+			'Eloquent Models' => 		'ftrotter\DURCC\Generators\LaravelEloquentGenerator',
 		];
 
 	//second phase generators get the benifit of actually using the first-generation generators 
 	//in their results... 	
 	$secondPhaseGenerators = [
-			'Web Controllers' => 		'ftrotter\DURCCC\Generators\LaravelControllerGenerator',
-			'Mustache Edit Views' =>	'ftrotter\DURCCC\Generators\MustacheEditViewGenerator',
-			'Mustache Index Page' => 	'ftrotter\DURCCC\Generators\MustacheIndexViewGenerator',
-			'Laravel Routes' => 		'ftrotter\DURCCC\Generators\LaravelRouteGenerator',	
-			'Test Routes' =>		'ftrotter\DURCCC\Generators\LaravelTestRouteGenerator',	
-			'Mustache Menu' => 		'ftrotter\DURCCC\Generators\MustacheMenuGenerator',	
-			'MySQLDump' => 			'ftrotter\DURCCC\Generators\MySQLDumpGenerator',	
-			'Zermelo Index' => 		'ftrotter\DURCCC\Generators\ZermeloIndexGenerator',
+			'Web Controllers' => 		'ftrotter\DURCC\Generators\LaravelControllerGenerator',
+			'Mustache Edit Views' =>	'ftrotter\DURCC\Generators\MustacheEditViewGenerator',
+			'Mustache Index Page' => 	'ftrotter\DURCC\Generators\MustacheIndexViewGenerator',
+			'Laravel Routes' => 		'ftrotter\DURCC\Generators\LaravelRouteGenerator',	
+			'Test Routes' =>		'ftrotter\DURCC\Generators\LaravelTestRouteGenerator',	
+			'Mustache Menu' => 		'ftrotter\DURCC\Generators\MustacheMenuGenerator',	
+			'MySQLDump' => 			'ftrotter\DURCC\Generators\MySQLDumpGenerator',	
+			'Zermelo Index' => 		'ftrotter\DURCC\Generators\ZermeloIndexGenerator',
 
 		];
 
@@ -66,8 +66,8 @@ class DURCCWriteCommand extends Command{
 		echo "DURCC:write Beginning code generation!\n";
 	}
 
-	$relation_config = DURCC::readDURCCConfigJSON($relation_config_file);
-	$settings_config = DURCC::readDURCCConfigJSON($settings_config_file);
+	$relation_config = DURCC::readDURCConfigJSON($relation_config_file);
+	$settings_config = DURCC::readDURCConfigJSON($settings_config_file);
 
 
 	//each generator handles the creation of different type of file...

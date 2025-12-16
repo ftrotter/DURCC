@@ -1,13 +1,13 @@
 <?php
 
-namespace ftrotter\DURCCC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 /*
 	A layer between DURCC Controllers and Laravel Controllers
 */
-class DURCCController extends Controller{
+class DURCController extends Controller{
 
 	public function _getMainTemplateName(){
 		//hardcoded for now.. lets get smarter!!

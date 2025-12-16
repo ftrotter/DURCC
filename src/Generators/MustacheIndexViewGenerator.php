@@ -2,11 +2,11 @@
 /*
 	Creates a mustache index view..
 */
-namespace ftrotter\DURCCC\Generators;
+namespace ftrotter\DURCC\Generators;
 
-use ftrotter\DURCCC\DURCC;
+use ftrotter\DURCC\DURCC;
 
-class MustacheIndexViewGenerator extends \ftrotter\DURCCC\DURCCGenerator {
+class MustacheIndexViewGenerator extends \ftrotter\DURCC\DURCCGenerator {
 
 
         public static function start(

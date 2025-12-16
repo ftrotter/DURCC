@@ -1,5 +1,5 @@
 <?php
-namespace ftrotter\DURCCC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;

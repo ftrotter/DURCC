@@ -1,5 +1,5 @@
 <?php
-namespace ftrotter\DURCCC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -209,7 +209,7 @@ ORDER BY `TABLE_NAME`,`ORDINAL_POSITION`
 		Simple function for reading the various json config files...
 		This function will read in both the 'settings' and 'relation' configuration json files... as well as any additional in the future...
 	*/
-	public static function readDURCCConfigJSON($config_file_name){
+	public static function readDURCConfigJSON($config_file_name){
 
 		if(!file_exists($config_file_name)){
 			return([]); //return an empty array in this case...

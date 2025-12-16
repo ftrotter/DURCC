@@ -2,11 +2,11 @@
 /*
 	Generates a mysql dump of the schema for each table..
 */
-namespace ftrotter\DURCCC\Generators;
+namespace ftrotter\DURCC\Generators;
 
-use ftrotter\DURCCC\DURCC;
+use ftrotter\DURCC\DURCC;
 
-class MySQLDumpGenerator extends \ftrotter\DURCCC\DURCCGenerator {
+class MySQLDumpGenerator extends \ftrotter\DURCC\DURCCGenerator {
 
 
         //Run only once at the end of generation

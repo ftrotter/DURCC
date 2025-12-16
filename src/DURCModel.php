@@ -1,6 +1,6 @@
 <?php
 
-namespace ftrotter\DURCCC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -8,7 +8,7 @@ use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Validator;
-use ftrotter\DURCCC\DURCC;
+use ftrotter\DURCC\DURCC;
 //use Owen It\Auditing\Contracts\Auditable;
 // Owen It is abandoned for php 8
 /*

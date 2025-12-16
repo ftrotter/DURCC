@@ -7,7 +7,7 @@
 	and export them as json files
 
 */
-namespace ftrotter\DURCCC;
+namespace ftrotter\DURCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -255,7 +255,7 @@ class DURCCMineCommand extends Command{
 
 	$config_file_location = base_path()."/config/DURCC_setting_config.json";
 
-	$current_settings = DURCC::readDURCCConfigJSON($config_file_location);
+	$current_settings = DURCC::readDURCConfigJSON($config_file_location);
 
 	//whatever the configuring developer has set will take precedence over what we automatically set
 	foreach($current_settings as $this_db => $table_list){
