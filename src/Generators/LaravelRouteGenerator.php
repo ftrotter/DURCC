@@ -5,15 +5,15 @@
 
 
 */
-namespace ftrotter\DURCC\Generators;
+namespace ftrotter\DURCCC\Generators;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\DB;
-use ftrotter\DURCC\DURC;
-class LaravelRouteGenerator extends \ftrotter\DURCC\DURCGenerator {
+use ftrotter\DURCCC\DURCC;
+class LaravelRouteGenerator extends \ftrotter\DURCCC\DURCCGenerator {
 
 
         //Run only once at the end of generation
@@ -39,11 +39,11 @@ class LaravelRouteGenerator extends \ftrotter\DURCC\DURCGenerator {
                                                         $URLroot){
 		$file = LaravelRouteGenerator::getFile();
 
-		$gen_string = DURC::get_gen_string();
+		$gen_string = DURCC::get_gen_string();
 		$header = "<?php
 /*
-This is an auto generated route file from DURC
-this will be automatically overwritten by future DURC runs.
+This is an auto generated route file from DURCC
+this will be automatically overwritten by future DURCC runs.
 
 
 */
@@ -55,7 +55,7 @@ this will be automatically overwritten by future DURC runs.
 	}//end start
 
 /*
-        This accepts the data for each table in the database that DURC is aware of..
+        This accepts the data for each table in the database that DURCC is aware of..
         and generates a Laravel Route
 */
         public static function run_generator($data_for_gen){
@@ -73,7 +73,7 @@ this will be automatically overwritten by future DURC runs.
 
 
 		$snippet = " 
-//DURC->	$database.$table
+//DURCC->	$database.$table
 Route::resource(\"$URLroot$class_name\", '$class_name"."Controller');
 Route::get(\"$URLroot"."json/$class_name/{"."$class_name"."_id}\", '$class_name"."Controller@jsonone');
 Route::get(\"$URLroot"."json/$class_name/\", '$class_name"."Controller@jsonall');

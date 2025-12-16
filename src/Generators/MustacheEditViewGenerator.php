@@ -1,14 +1,14 @@
 <?php
 /*
-	This makes the mustache form for creating and updating the DURC record
+	This makes the mustache form for creating and updating the DURCC record
 
 */
-namespace ftrotter\DURCC\Generators;
+namespace ftrotter\DURCCC\Generators;
 
-use ftrotter\DURCC\DURC;
+use ftrotter\DURCCC\DURCC;
 use Illuminate\Support\Str;
 
-class MustacheEditViewGenerator extends \ftrotter\DURCC\DURCMustacheGenerator {
+class MustacheEditViewGenerator extends \ftrotter\DURCCC\DURCCMustacheGenerator {
 
 
         public static function start(
@@ -28,7 +28,7 @@ class MustacheEditViewGenerator extends \ftrotter\DURCC\DURCMustacheGenerator {
 
 
 /*
-        This accepts the data for each table in the database that DURC is aware of..
+        This accepts the data for each table in the database that DURCC is aware of..
         and generates a Mustache Edit form
 */
         public static function run_generator($data_for_gen){
@@ -103,7 +103,7 @@ class MustacheEditViewGenerator extends \ftrotter\DURCC\DURCMustacheGenerator {
 
 	}
 
-                $gen_string = DURC::get_gen_string();
+                $gen_string = DURCC::get_gen_string();
 
 		$template_text = "
 {{#has_session_status}}
@@ -128,7 +128,7 @@ $delete_alert_code
   <div class='card-header'>
 <h4> {{durc_instance_name}}</h4>
 <ul>
-<li> <a href='/Zermelo/DURC_$class_name/'>Return to $class_name list</a> </li>
+<li> <a href='/Zermelo/DURCC_$class_name/'>Return to $class_name list</a> </li>
 {{^is_new}}
 <li> <a href='$URLroot$class_name/create'>Create new $class_name </a> </li>
 {{/is_new}}
@@ -170,7 +170,7 @@ $delete_alert_code
 				//note tha hidden values will break when they are required in the underlying database...
 				//and they are not already set... or set using a DB default... or allowing NULL in field... etc etc..
 			}else{
-				$field_html = parent::_get_field_html($URLroot,$field_data); //this is defined in ../DURCMustacheGenerator.php
+				$field_html = parent::_get_field_html($URLroot,$field_data); //this is defined in ../DURCCMustacheGenerator.php
 				//echo $field_html;
 				$template_text .= $field_html;
 			}
@@ -261,8 +261,8 @@ $delete_alert_code
                    } else {
                        $last_three = substr( $column_name, -3 );
                        if ( $last_three == '_id' ) {
-                           //then this is an ID and perhaps there is a _DURClabel that goes with it!!
-                           $template_text .= "\t\t\t<td>{{" . "$column_name" . "_DURClabel}} ({{" . "$column_name" . "}}) </td>";
+                           //then this is an ID and perhaps there is a _DURCClabel that goes with it!!
+                           $template_text .= "\t\t\t<td>{{" . "$column_name" . "_DURCClabel}} ({{" . "$column_name" . "}}) </td>";
                        } else {
                            //normal data no link
                            $template_text .= "\t\t\t<td>{{" . "$column_name" . "}}</td>\n";
@@ -346,8 +346,8 @@ $template_text .= "
 				}else{
 					$last_three = substr($column_name,-3);
 					if($last_three == '_id'){
-						//then this is an ID and perhaps there is a _DURClabel that goes with it!!
-						$template_text .= "\t\t\t<td>{{"."$column_name"."_DURClabel}} ({{"."$column_name"."}}) </td>";
+						//then this is an ID and perhaps there is a _DURCClabel that goes with it!!
+						$template_text .= "\t\t\t<td>{{"."$column_name"."_DURCClabel}} ({{"."$column_name"."}}) </td>";
 					}else{
 						//normal data no link
 						$template_text .= "\t\t\t<td>{{"."$column_name"."}}</td>\n";
@@ -450,12 +450,12 @@ $template_text .= "
     </script>
 ";
 
-		$my_path = base_path() . "/resources/views/DURC/$class_name/";
+		$my_path = base_path() . "/resources/views/DURCC/$class_name/";
 
 
                 if(!is_dir($my_path)){
                         if (!mkdir($my_path, 0777, true)) {
-                                die("MustacheEditViewGenerator: DURC needs to create the $my_path directory... but it could not.. what if it already existed? What then?");
+                                die("MustacheEditViewGenerator: DURCC needs to create the $my_path directory... but it could not.. what if it already existed? What then?");
                         }
                 }
 

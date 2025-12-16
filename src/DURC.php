@@ -1,5 +1,5 @@
 <?php
-namespace ftrotter\DURCC;
+namespace ftrotter\DURCCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\DB;
 /*
 	A good place for complex but clearly static fuinctions....
 */
-class DURC{
+class DURCC{
 
 
 	/*
 		Gets the structure of all databases in the analysis...
 
-		works by making lots of calls to DURC::getTables()
+		works by making lots of calls to DURCC::getTables()
 
 		pass in a $db_array which is a list of strings that are the databases..
 		get back an array of the following format...
@@ -36,7 +36,7 @@ class DURC{
 
 		$db_struct = [];
 		foreach($db_array as $this_db){
-			$db_struct[$this_db] = DURC::getTables($this_db);
+			$db_struct[$this_db] = DURCC::getTables($this_db);
 		}
 		ksort($db_struct); //has the effect of putting the aaaDurctest DB first in the routes which is helpful for testing
 		return($db_struct);
@@ -141,18 +141,18 @@ ORDER BY `TABLE_NAME`,`ORDINAL_POSITION`
 
 	//using the users durc configuration..
 	//return a list of the create form  urls for the list view
-	public static function getDURCUrlArray(){
-		$user_edit_file_name = base_path()."/config/DURC_config.edit_me.json";
+	public static function getDURCCUrlArray(){
+		$user_edit_file_name = base_path()."/config/DURCC_config.edit_me.json";
 		$user_config = json_decode(file_get_contents($user_edit_file_name),true);
 
 		$return_me = [];
 		foreach($user_config as $db => $durc_array){
 			foreach($durc_array as $durc_string => $durc_details){
-				$create_url = "/DURC/$durc_string/create";
+				$create_url = "/DURCC/$durc_string/create";
 				$durc_listing = new \stdClass;
 				$durc_listing->label = $durc_string;
 				$durc_listing->create_url = $create_url;
-				$list_url = "/Zermelo/DURC_$durc_string";
+				$list_url = "/Zermelo/DURCC_$durc_string";
 				$durc_listing->list_url = $list_url;
 				$return_me[$durc_string] = $durc_listing;
 			}
@@ -172,9 +172,9 @@ ORDER BY `TABLE_NAME`,`ORDINAL_POSITION`
 		This file just saves, and does not respect any squash value...
 		Logic implemented elsewhere must be used to ensure that loaded data was not lost.
 	*/
-	public static function writeDURCSettingConfigJSON($config_data){
+	public static function writeDURCCSettingConfigJSON($config_data){
 
-		$auto_gen_file_name = base_path()."/config/DURC_setting_config.json";
+		$auto_gen_file_name = base_path()."/config/DURCC_setting_config.json";
 
 		$config_json_text = json_encode($config_data, JSON_PRETTY_PRINT);
 
@@ -188,10 +188,10 @@ ORDER BY `TABLE_NAME`,`ORDINAL_POSITION`
 		But the autogen version is always shown for those who want to start maintaining their own relation paradigms... 
 		Unless specific configuration is handed over as parameter for code generation.. the 'edit_me' version will always be used...
 	*/
-	public static function writeDURCDesignConfigJSON($config_data, $squash = false){
+	public static function writeDURCCDesignConfigJSON($config_data, $squash = false){
 
-		$auto_gen_file_name = base_path()."/config/DURC_relation_config.autogen.json";
-		$user_edit_file_name = base_path()."/config/DURC_relation_config.edit_me.json";
+		$auto_gen_file_name = base_path()."/config/DURCC_relation_config.autogen.json";
+		$user_edit_file_name = base_path()."/config/DURCC_relation_config.edit_me.json";
 
 		$config_json_text = json_encode($config_data, JSON_PRETTY_PRINT);
 
@@ -209,7 +209,7 @@ ORDER BY `TABLE_NAME`,`ORDINAL_POSITION`
 		Simple function for reading the various json config files...
 		This function will read in both the 'settings' and 'relation' configuration json files... as well as any additional in the future...
 	*/
-	public static function readDURCConfigJSON($config_file_name){
+	public static function readDURCCConfigJSON($config_file_name){
 
 		if(!file_exists($config_file_name)){
 			return([]); //return an empty array in this case...
@@ -225,7 +225,7 @@ ORDER BY `TABLE_NAME`,`ORDINAL_POSITION`
 	}
 
 	public static function get_gen_string(){
-		return "DURC Generated At: ".date('l jS \of F Y h:i:s A');
+		return "DURCC Generated At: ".date('l jS \of F Y h:i:s A');
 	}
 
     /***
@@ -339,7 +339,7 @@ ORDER BY `TABLE_NAME`,`ORDINAL_POSITION`
         }
 
 
-        if ($model instanceof DURCModel) {
+        if ($model instanceof DURCCModel) {
             if ($skipDefaultRequirement === false &&
                 is_null($value) &&
                 !$model->isFieldNullable($field_name)) {
@@ -358,7 +358,7 @@ ORDER BY `TABLE_NAME`,`ORDINAL_POSITION`
     {
         $formatted_value = '';
 
-        if ( DURC::mapColumnDataTypeToInputType( $field_type, $field_name, $field_value ) == 'boolean' ) {
+        if ( DURCC::mapColumnDataTypeToInputType( $field_type, $field_name, $field_value ) == 'boolean' ) {
             if ( $field_value > 0 ) {
                 if ( $is_list ) {
                     $formatted_value = '✔'; // If we are in the list view, display a checkmark

@@ -2,11 +2,11 @@
 /*
 	Creates a mustache index view..
 */
-namespace ftrotter\DURCC\Generators;
+namespace ftrotter\DURCCC\Generators;
 
-use ftrotter\DURCC\DURC;
+use ftrotter\DURCCC\DURCC;
 
-class MustacheIndexViewGenerator extends \ftrotter\DURCC\DURCGenerator {
+class MustacheIndexViewGenerator extends \ftrotter\DURCCC\DURCCGenerator {
 
 
         public static function start(
@@ -26,7 +26,7 @@ class MustacheIndexViewGenerator extends \ftrotter\DURCC\DURCGenerator {
 
 
 /*
-        This accepts the data for each table in the database that DURC is aware of..
+        This accepts the data for each table in the database that DURCC is aware of..
         and generates a Mustache Index View
 */
         public static function run_generator($data_for_gen){
@@ -42,7 +42,7 @@ class MustacheIndexViewGenerator extends \ftrotter\DURCC\DURCGenerator {
 		}
 
 
-                $gen_string = DURC::get_gen_string();
+                $gen_string = DURCC::get_gen_string();
 		
 		$parent_file_names = [
 			 "index.mustache",
@@ -98,7 +98,7 @@ $paging_widget = "
 
 		$template_text = "
 <h1>$class_name list </h1>
-<h3> <a href='/Zermelo/DURC_$class_name'>Zermelo $class_name Report</a></h3>
+<h3> <a href='/Zermelo/DURCC_$class_name'>Zermelo $class_name Report</a></h3>
 Create <a href='$URLroot$class_name/create/'>new $class_name</a><br>
 
 $paging_widget
@@ -123,8 +123,8 @@ $header_row
                                         if($last_three == '_id'){
 						if(isset($field_lookup[$column_name])){
 							$data_type = $field_lookup[$column_name];
-							//then this is linkable and should have a _DURClabel	
-                                                	$template_text .= "\t\t\t<td>{{"."$column_name"."_DURClabel}} <a href='$URLroot$data_type/{{"."$column_name"."}}/'> ({{"."$column_name"."}})</a> </td>";
+							//then this is linkable and should have a _DURCClabel	
+                                                	$template_text .= "\t\t\t<td>{{"."$column_name"."_DURCClabel}} <a href='$URLroot$data_type/{{"."$column_name"."}}/'> ({{"."$column_name"."}})</a> </td>";
 						}
                                         }else{
                                                 //normal data no link
@@ -146,9 +146,9 @@ $paging_widget
 //we need a way to check to see if the page is loaded before we call DataTable()
 //but we frequently do not have JQuery yet... it could be loaded at the bottom of the page...
 //so we have a pure JS alternative to the ready() function..
-var DURC_checkReadyState = setInterval(() => {
+var DURCC_checkReadyState = setInterval(() => {
   if (document.readyState === 'complete') {
-    clearInterval(DURC_checkReadyState);
+    clearInterval(DURCC_checkReadyState);
     // document is ready
     $('#table_$class_name').DataTable(
 {
@@ -164,12 +164,12 @@ var DURC_checkReadyState = setInterval(() => {
 
 ";
 
-		$my_path = base_path() . "/resources/views/DURC/$class_name/";
+		$my_path = base_path() . "/resources/views/DURCC/$class_name/";
 
 
                 if(!is_dir($my_path)){
                         if (!mkdir($my_path, 0777, true)) {
-                                die("MustacheIndexViewGenerator: DURC needs to create the $my_path directory... but it could not.. what if it already existed? What then?");
+                                die("MustacheIndexViewGenerator: DURCC needs to create the $my_path directory... but it could not.. what if it already existed? What then?");
                         }
                 }
 

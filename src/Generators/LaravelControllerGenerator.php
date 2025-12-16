@@ -5,12 +5,12 @@
 
 
 */
-namespace ftrotter\DURCC\Generators;
+namespace ftrotter\DURCCC\Generators;
 
-use ftrotter\DURCC\DURC;
-use ftrotter\DURCC\Signature;
+use ftrotter\DURCCC\DURCC;
+use ftrotter\DURCCC\Signature;
 
-class LaravelControllerGenerator extends \ftrotter\DURCC\DURCGenerator {
+class LaravelControllerGenerator extends \ftrotter\DURCCC\DURCCGenerator {
 
 
         public static function start(
@@ -28,7 +28,7 @@ class LaravelControllerGenerator extends \ftrotter\DURCC\DURCGenerator {
         }
 
 /*
-	This accepts the data for each table in the database that DURC is aware of..
+	This accepts the data for each table in the database that DURCC is aware of..
 	and generates a Laravel Controller
 */
 	public static function run_generator($data_for_gen){
@@ -37,7 +37,7 @@ class LaravelControllerGenerator extends \ftrotter\DURCC\DURCGenerator {
 		extract($data_for_gen); //everything goes into the local scope... this includes all settings from the config json file...
 
 		//terrible idea. Forces contstant git changes for no actual code change.
-                $gen_string = DURC::get_gen_string();
+                $gen_string = DURCC::get_gen_string();
 
         // Write the hidden fields
         $hidden_fields_array_code = "\tprotected static \$hidden_fields_array = [\n";
@@ -102,16 +102,16 @@ class LaravelControllerGenerator extends \ftrotter\DURCC\DURCGenerator {
 
 		$parent_class_text = "<?php
 
-namespace App\DURC\Controllers;
+namespace App\DURCC\Controllers;
 
 use App\\$class_name;
 use Illuminate\Http\Request;
-use ftrotter\DURCC\DURC;
-use ftrotter\DURCC\DURCController;
+use ftrotter\DURCCC\DURCC;
+use ftrotter\DURCCC\DURCCController;
 use Illuminate\Support\Facades\View;
-use ftrotter\DURCC\DURCInvalidDataException;
+use ftrotter\DURCCC\DURCCInvalidDataException;
 
-class $class_name"."Controller extends DURCController
+class $class_name"."Controller extends DURCCController
 {
 
 
@@ -150,16 +150,16 @@ $with_summary_array_code
 
                                         if ( isset( $class_name::\$field_type_map[\$lowest_key] ) ) {
                                             \$field_type = $class_name::\$field_type_map[ \$lowest_key ];
-                                            \$return_me_data[\$data_i][\$key .'_id_DURClabel'] = DURC::formatForDisplay( \$field_type, \$lowest_key, \$lowest_data, true );
+                                            \$return_me_data[\$data_i][\$key .'_id_DURCClabel'] = DURCC::formatForDisplay( \$field_type, \$lowest_key, \$lowest_data, true );
                                         } else {
-                                            \$return_me_data[\$data_i][\$key .'_id_DURClabel'] = \$lowest_data;
+                                            \$return_me_data[\$data_i][\$key .'_id_DURCClabel'] = \$lowest_data;
                                         }
                                 }
                         }
 
                         if ( isset( $class_name::\$field_type_map[\$key] ) ) {
                             \$field_type = $class_name::\$field_type_map[ \$key ];
-                            \$return_me_data[\$data_i][\$key] = DURC::formatForDisplay( \$field_type, \$key, \$value, true );
+                            \$return_me_data[\$data_i][\$key] = DURCC::formatForDisplay( \$field_type, \$key, \$value, true );
                         } else {
                             \$return_me_data[\$data_i][\$key] = \$value;
                         }
@@ -174,7 +174,7 @@ $with_summary_array_code
                                 foreach(\$value as \$lowest_key => \$lowest_data){
                                         //then this is a loaded attribute..
                                         //lets move it one level higher...
-                                        \$return_me['data'][\$data_i][\$key .'_id_DURClabel'] = \$lowest_data;
+                                        \$return_me['data'][\$data_i][\$key .'_id_DURCClabel'] = \$lowest_data;
                                 }
                                 unset(\$return_me['data'][\$data_i][\$key]);
                         }
@@ -308,7 +308,7 @@ $with_summary_array_code
             var_export(\$this->view_data);
             exit();
         }
-        \$durc_template_results = view('DURC.$class_name.index',\$this->view_data);        
+        \$durc_template_results = view('DURCC.$class_name.index',\$this->view_data);        
         return view(\$main_template_name,['content' => \$durc_template_results]);
     }
 
@@ -330,7 +330,7 @@ $with_summary_array_code
         $save_model_data
         \$new_id = \$myNew$class_name"."->id;
         return redirect(\"$URLroot$class_name/\$new_id\")->with('status', 'Data Saved!');
-        } catch (DURCInvalidDataException \$e) {
+        } catch (DURCCInvalidDataException \$e) {
         $save_update_model_redirect
         } catch (\\Exception \$e) {
         $save_new_model_redirect
@@ -358,7 +358,7 @@ $with_summary_array_code
 		if (\$$class_name === null) {
             return response()->json(\"$class_name with id = {\$$class_name"."_id} Not Found\", 404);
         }
-		\$$class_name = \$$class_name"."->fresh_with_relations(); //this is a custom function from DURCModel. you can control what gets autoloaded by modifying the DURC_selfish_with contents on your customized models
+		\$$class_name = \$$class_name"."->fresh_with_relations(); //this is a custom function from DURCCModel. you can control what gets autoloaded by modifying the DURCC_selfish_with contents on your customized models
 		\$return_me_array = \$$class_name"."->toArray();
 		\$search_fields = \App\\$class_name::getSearchFields();
 
@@ -383,7 +383,7 @@ $with_summary_array_code
 			}
 		}
 
-		//lets get a card_body from the DURC mode class!!
+		//lets get a card_body from the DURCC mode class!!
 		if(!isset(\$return_me_array['card_body'])){ //allow the user to use this as a field without pestering..
 			//this is simply the name unless someone has put work into this...
 			\$return_me_array['card_body'] = \$$class_name"."->getCardBody();
@@ -451,7 +451,7 @@ $with_summary_array_code
         if(\$$class_name"."->exists){	
     
       		//well lets properly eager load this object with a refresh to load all of the related things
-      		\$$class_name = \$$class_name"."->fresh_with_relations(); //this is a custom function from DURCModel. you can control what gets autoloaded by modifying the DURC_selfish_with contents on your customized models
+      		\$$class_name = \$$class_name"."->fresh_with_relations(); //this is a custom function from DURCCModel. you can control what gets autoloaded by modifying the DURCC_selfish_with contents on your customized models
     
       		//put the contents into the view...
 		//we have to do this even if the object is new, because sometimes the variable is set from a GET or POST request... 
@@ -465,7 +465,7 @@ $with_summary_array_code
             
                 	if ( isset( $class_name::\$field_type_map[\$key] ) ) {
                 		\$field_type = $class_name::\$field_type_map[ \$key ];
-                		\$this->view_data[\$key] = DURC::formatForDisplay( \$field_type, \$key, \$input );
+                		\$this->view_data[\$key] = DURCC::formatForDisplay( \$field_type, \$key, \$input );
         		} else {
                 		\$this->view_data[\$key] = \$input;
         		}
@@ -501,7 +501,7 @@ $with_summary_array_code
         }
         
     
-        \$durc_template_results = view('DURC.$class_name.edit',\$this->view_data);        
+        \$durc_template_results = view('DURCC.$class_name.edit',\$this->view_data);        
         return view(\$main_template_name,['content' => \$durc_template_results]);
     }
 
@@ -520,7 +520,7 @@ $with_summary_array_code
         try {
         $save_model_data
             return redirect(\"$URLroot$class_name/\$id\")->with('status', 'Data Saved!');
-        } catch (DURCInvalidDataException \$e) {
+        } catch (DURCCInvalidDataException \$e) {
         $save_update_model_redirect
         } catch (\\Exception \$e) {
         $save_new_model_redirect
@@ -544,7 +544,7 @@ $with_summary_array_code
     public function restore( \$id )
     {
         \$$class_name = $class_name::withTrashed()->find(\$id)->restore();
-        return redirect(\"/DURC/test_soft_delete/\$id\")->with('status', 'Data Restored!');
+        return redirect(\"/DURCC/test_soft_delete/\$id\")->with('status', 'Data Restored!');
     }
 }
 ";
@@ -556,10 +556,10 @@ $with_summary_array_code
 namespace App\Http\Controllers;
 
 use App\\$class_name;
-use App\DURC\Controllers\\$class_name"."Controller as DURCParentController;
+use App\DURCC\Controllers\\$class_name"."Controller as DURCCParentController;
 use Illuminate\Http\Request;
 
-class $class_name"."Controller extends DURCParentController
+class $class_name"."Controller extends DURCCParentController
 {
     /**
      * Display a listing of the resource.
@@ -571,9 +571,9 @@ class $class_name"."Controller extends DURCParentController
 	//anything you put into \$this->view_data will be available in the view...
 	//\$this->view_data['how_cool_is_fred'] = 'very'
 	//will mean that you can use {{how_cool_is_fred}} etc etc..
-	//remember to look in /resources/views/DURC
-	//to find the DURC generated views. Once you override those views..
-	//DURC will not overwrite them anymore... same thing with this file.. you can change it and it will not
+	//remember to look in /resources/views/DURCC
+	//to find the DURCC generated views. Once you override those views..
+	//DURCC will not overwrite them anymore... same thing with this file.. you can change it and it will not
 	//be overwritten by subsequent files...
 
 	return(parent::index(\$request));
@@ -643,11 +643,11 @@ class $class_name"."Controller extends DURCParentController
 ";
 
 		$app_path = base_path() . '/app/Http/Controllers/'; //we put the editable file in the main app directory where all of the others live..
-		$durc_app_path = base_path() . '/app/DURC/Controllers/'; //we put the auto-genertated parent classes in a directory above that..
+		$durc_app_path = base_path() . '/app/DURCC/Controllers/'; //we put the auto-genertated parent classes in a directory above that..
 
 		if(!is_dir($durc_app_path)){
 			if (!mkdir($durc_app_path, 0777, true)) {
-    				die("DURC needs to create the $durc_app_path directory... but it could not.. what if it already existed? What then?");
+    				die("DURCC needs to create the $durc_app_path directory... but it could not.. what if it already existed? What then?");
 			}
 		}
 

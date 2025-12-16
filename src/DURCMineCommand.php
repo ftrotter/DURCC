@@ -7,22 +7,22 @@
 	and export them as json files
 
 */
-namespace ftrotter\DURCC;
+namespace ftrotter\DURCCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 use DB;
 
-class DURCMineCommand extends Command{
+class DURCCMineCommand extends Command{
 
-    protected $signature = 'DURC:mine {--squash} {--DB=*}';
-    protected $description = 'DURC:mine generates a json representation of your database structure and relationships, by mining your DB directly.';
+    protected $signature = 'DURCC:mine {--squash} {--DB=*}';
+    protected $description = 'DURCC:mine generates a json representation of your database structure and relationships, by mining your DB directly.';
 
     public function handle(){
 	//what does this do?
 
-	echo "DURC:mine Mining database for relational structure..\n";
+	echo "DURCC:mine Mining database for relational structure..\n";
 
 	$fatal_error = false;
 
@@ -30,7 +30,7 @@ class DURCMineCommand extends Command{
 
 	$squash = $this->option('squash');
 
-	$db_struct = DURC::getDBStruct($databases);
+	$db_struct = DURCC::getDBStruct($databases);
 
 	//do a pass to get all of the potential table targets
 
@@ -68,7 +68,7 @@ class DURCMineCommand extends Command{
 			}
 		}
 	    }else{//end if table_list count is over zero	
-		echo "Critical Error: $db does not appear to have any tables to read... this is too confusing for DURC to handle\n";
+		echo "Critical Error: $db does not appear to have any tables to read... this is too confusing for DURCC to handle\n";
 		exit(1); //exit with a nonzero value to indicate a failure.
 	    }
 	}
@@ -253,9 +253,9 @@ class DURCMineCommand extends Command{
 		}//end foreach table_list
 	}//end foreach db_struct
 
-	$config_file_location = base_path()."/config/DURC_setting_config.json";
+	$config_file_location = base_path()."/config/DURCC_setting_config.json";
 
-	$current_settings = DURC::readDURCConfigJSON($config_file_location);
+	$current_settings = DURCC::readDURCCConfigJSON($config_file_location);
 
 	//whatever the configuring developer has set will take precedence over what we automatically set
 	foreach($current_settings as $this_db => $table_list){
@@ -268,15 +268,15 @@ class DURCMineCommand extends Command{
 		}
 	}
 
-	DURC::writeDURCSettingConfigJSON($config_settings_struct);
+	DURCC::writeDURCCSettingConfigJSON($config_settings_struct);
 
 	//later we will support the notion of 'many_to_many' through pivot tables...
 	
 	//later we MAY support the notion of 'has_many_through' but that could create a rats nest...
 
-	DURC::writeDURCDesignConfigJSON($new_struct,$squash);	
+	DURCC::writeDURCCDesignConfigJSON($new_struct,$squash);	
 
-	echo "DURC:mine finished writing json configuration file\n";
+	echo "DURCC:mine finished writing json configuration file\n";
 
     }
 

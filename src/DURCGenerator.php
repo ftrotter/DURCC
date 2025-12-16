@@ -1,5 +1,5 @@
 <?php
-namespace ftrotter\DURCC;
+namespace ftrotter\DURCCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 	output... some create views, others creat zermelo reports
 	still others make eloquent parent/child objects
 */
-abstract class DURCGenerator{
+abstract class DURCCGenerator{
 
     //possible created_at field names...
     //in reverse order of priority. we pick the last one.
@@ -60,7 +60,7 @@ abstract class DURCGenerator{
                         'many_many' => null,
                         'many_through' => null,
                         'squash' => false,
-                        'URLroot' => '/DURC/',
+                        'URLroot' => '/DURCC/',
                         'create_table_sql' => null,
                 ];
 
@@ -96,7 +96,7 @@ abstract class DURCGenerator{
      * @param $column_name
      * @return bool
      *
-     * Given an array of fields (see config/DURC_config.autogen.json for field attributes)
+     * Given an array of fields (see config/DURCC_config.autogen.json for field attributes)
      * check to see if the array contains the String column name passed, in the $column_name
      * parameter. Return true if the array $fields contains $coulmn_name, false OW
      */
@@ -118,7 +118,7 @@ abstract class DURCGenerator{
      * @param array $possible_fields
      * @return bool|mixed
      *
-     * Given an array of fields (see config/DURC_config.autogen.json for field attributes)
+     * Given an array of fields (see config/DURCC_config.autogen.json for field attributes)
      * and an array of possible fields, check to see if any of the column names in the
      * array of valid fields exist in the array of possible fields. If it exists, return
      * the field, otherwise return false.
@@ -177,7 +177,7 @@ abstract class DURCGenerator{
      * @param $field_data
      * @return mixed|null
      *
-     * DURC mines the default value for a field from the database schema.
+     * DURCC mines the default value for a field from the database schema.
      * This function checks to see if there is a default value set for this field in the database.
      * If there is a default value, return it, otherwise return null
      */
@@ -196,7 +196,7 @@ abstract class DURCGenerator{
      * @param $field_data
      * @return bool|mixed
      *
-     * DURC mines the NULLABLE metadata from the database schema. This function
+     * DURCC mines the NULLABLE metadata from the database schema. This function
      * checks to see if this field is allowed to be NULL based on the schema.
      * If the field can be NULL, return true, othewise return false.
      */
@@ -215,7 +215,7 @@ abstract class DURCGenerator{
      * @param $field_data
      * @return bool
      *
-     * DURC mines the AUTO_INCREMENT attribute from the database schema. This function
+     * DURCC mines the AUTO_INCREMENT attribute from the database schema. This function
      * checks to see if this field is an auto-increment field. If this field is an AI field,
      * return true, otherwise return false.
      */

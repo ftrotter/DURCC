@@ -1,19 +1,19 @@
 <?php
 /*
-	This is the new Zermelo index, which is better in every way than the current mustache index
+	This is the new ZZermelo index, which is better in every way than the current mustache index
 
 */
-namespace ftrotter\DURCC\Generators;
+namespace ftrotter\DURCCC\Generators;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\DB;
-use ftrotter\DURCC\DURC;
-use ftrotter\DURCC\Signature;
+use ftrotter\DURCCC\DURCC;
+use ftrotter\DURCCC\Signature;
 
-class ZermeloIndexGenerator extends \ftrotter\DURCC\DURCGenerator {
+class ZZermeloIndexGenerator extends \ftrotter\DURCCC\DURCCGenerator {
 
 
         //Run only once at the end of generation
@@ -33,8 +33,8 @@ class ZermeloIndexGenerator extends \ftrotter\DURCC\DURCGenerator {
 	}//end start
 
 /*
-        This accepts the data for each table in the database that DURC is aware of..
-	Zermelo report of underlying data table..
+        This accepts the data for each table in the database that DURCC is aware of..
+	ZZermelo report of underlying data table..
 */
         public static function run_generator($data_for_gen){
 
@@ -140,7 +140,7 @@ class ZermeloIndexGenerator extends \ftrotter\DURCC\DURCGenerator {
 \$$other_table"."_tmp = '$col_prefix'.\$$to_table"."_field;
 if(isset(\$row[\$$other_table"."_tmp])){
 	\$$other_table"."_data = \$row[\$$other_table"."_tmp];
-	\$row[\$$other_table"."_tmp] = \"<a target='_blank' href='/Zermelo/DURC_$to_table/\$$local_key'>\$$other_table"."_data</a>\";
+	\$row[\$$other_table"."_tmp] = \"<a target='_blank' href='/ZZermelo/DURCC_$to_table/\$$local_key'>\$$other_table"."_data</a>\";
 }
 
 \$$other_table"."_img_tmp = '$col_prefix'.\$$to_table"."_img_field;
@@ -197,12 +197,12 @@ LEFT JOIN $to_db.$to_table AS $to_table_alias ON
 
 
 
-		$report_class_name = "DURC_$class_name";
+		$report_class_name = "DURCC_$class_name";
 
 	
 		$report_php_code = "<?php
 namespace App\Reports;
-use ftrotter\ZZermelo\Reports\Tabular\AbstractTabularReport;
+use ftrotter\ZZZermelo\Reports\Tabular\AbstractTabularReport;
 
 class $report_class_name extends AbstractTabularReport
 {
@@ -217,7 +217,7 @@ class $report_class_name extends AbstractTabularReport
     public function GetReportDescription(): ?string {
         \$desc = \"View the $class_name data
 			<br>
-			<a href='/DURC/$class_name/create'>Add new $class_name</a>
+			<a href='/DURCC/$class_name/create'>Add new $class_name</a>
 \";
         return(\$desc);
     }
@@ -277,8 +277,8 @@ WHERE $table.id = \$index
 $pre_sql_php
 
 
-        //link this row to its DURC editor
-        \$row['id'] = \"<a href='/DURC/$class_name/\$id'>\$id</a>\";
+        //link this row to its DURCC editor
+        \$row['id'] = \"<a href='/DURCC/$class_name/\$id'>\$id</a>\";
 
 $decoration_php
 
@@ -286,8 +286,8 @@ $decoration_php
         return \$row;
     }
 
-    //see Zermelo documentation to understand following functions:
-    //https://github.com/CareSet/Zermelo
+    //see ZZermelo documentation to understand following functions:
+    //https://github.com/CareSet/ZZermelo
 
     public \$NUMBER     = ['ROWS','AVG','LENGTH','DATA_FREE'];
     public \$CURRENCY = [];

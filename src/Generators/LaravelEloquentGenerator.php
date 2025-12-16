@@ -5,13 +5,13 @@
 
 
 */
-namespace ftrotter\DURCC\Generators;
+namespace ftrotter\DURCCC\Generators;
 
-use ftrotter\DURCC\DURC;
-use ftrotter\DURCC\Signature;
+use ftrotter\DURCCC\DURCC;
+use ftrotter\DURCCC\Signature;
 use Illuminate\Support\Str;
 
-class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
+class LaravelEloquentGenerator extends \ftrotter\DURCCC\DURCCGenerator {
 
         public static function start(
 							$db_config,
@@ -39,7 +39,7 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
      *
      * We try to take advantage of as many built-in validators as possible since this
      * issue:
-     * https://github.com/CareSet/DURC/issues/61
+     * https://github.com/CareSet/DURCC/issues/61
      *
      */
     protected static function _generate_validation_rule_for_field($field) {
@@ -127,7 +127,7 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
     }
 
 /*
-        This accepts the data for each table in the database that DURC is aware of..
+        This accepts the data for each table in the database that DURCC is aware of..
         and generates a series of Laravel Eloquent Models
 */
         public static function run_generator($data_for_gen){
@@ -137,7 +137,7 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
 
 		$model_namespace = 'App';
 
-                $gen_string = DURC::get_gen_string();
+                $gen_string = DURCC::get_gen_string();
 
         // If the primary key is named other than id, then we need to tell Eloquent
         $primary_key_code = null;
@@ -148,7 +148,7 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
 			//this should never happen...
 			var_export($field);
 			echo "\nError: $class_name compile fail.. is_primary_key is not set in a field array.. field number $field_num\n";
-			echo "Sometimes this happens when you have the same table name in two different databases.. .DURC finds that confusing...\n";
+			echo "Sometimes this happens when you have the same table name in two different databases.. .DURCC finds that confusing...\n";
 			exit();
 		}
 
@@ -183,7 +183,7 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
             $this_possible_created_at === false ){
 		    // We don't have either timestamp
 			$timestamp_code = "public \$timestamps = false;";
-			$updated_at_code = '//DURC NOTE: did not find updated_at and created_at fields for this model' ."\n";
+			$updated_at_code = '//DURCC NOTE: did not find updated_at and created_at fields for this model' ."\n";
 			$created_at_code = '';
 		}
 
@@ -209,7 +209,7 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
 	$used_functions = [];
 	$with_array = [];
 
-	$has_many_code = "\n//DURC HAS_MANY SECTION\n";
+	$has_many_code = "\n//DURCC HAS_MANY SECTION\n";
 	if(!is_null($has_many)){
 		foreach($has_many as $other_table_name => $relate_details){
 
@@ -237,10 +237,10 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
 			$with_array[$other_table_name] = 'from many';
 		}
 	}else{
-		$has_many_code .= "\n\t\t\t//DURC did not detect any has_many relationships";
+		$has_many_code .= "\n\t\t\t//DURCC did not detect any has_many relationships";
 	}
 
-        $has_one_code = "\n//DURC HAS_ONE SECTION\n";
+        $has_one_code = "\n//DURCC HAS_ONE SECTION\n";
         if(!is_null($has_one)){
             foreach($has_one as $other_table_name => $relate_details){
 
@@ -268,11 +268,11 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
                 $with_array[$other_table_name] = 'from one';
             }
         }else{
-            $has_one_code .= "\n\t\t\t//DURC did not detect any has_one relationships";
+            $has_one_code .= "\n\t\t\t//DURCC did not detect any has_one relationships";
         }
 
 
-	$belongs_to_code = "\n//DURC BELONGS_TO SECTION\n";
+	$belongs_to_code = "\n//DURCC BELONGS_TO SECTION\n";
 	if(!is_null($belongs_to)){
 		foreach($belongs_to as $other_table_name => $relate_details){
 
@@ -298,18 +298,18 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
 				$with_array[$other_table_name] = 'belongs to';
 			}else{
 				$belongs_to_code .= "
-\t\t//DURC would have added $other_table_name but it was already used in has_many. 
+\t\t//DURCC would have added $other_table_name but it was already used in has_many. 
 \t\t//You will have to resolve these recursive relationships in your code.";
 
 			}
 
 		}
 	}else{
-		$belongs_to_code .= "\n\t\t\t//DURC did not detect any belongs_to relationships";
+		$belongs_to_code .= "\n\t\t\t//DURCC did not detect any belongs_to relationships";
 	}
 
 
-	$with_code = "	protected \$DURC_selfish_with = [ \n"; //this will end up using both has_many and belongs_to relationships...
+	$with_code = "	protected \$DURCC_selfish_with = [ \n"; //this will end up using both has_many and belongs_to relationships...
 
 	foreach($with_array as $this_with_item => $from){
 			$with_code .= "\t\t\t'$this_with_item', //from $from\n"; //the default is to automatically load has many in toArray and the $with variable forces autoload.
@@ -320,14 +320,14 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
 	$date_fields = [];
 	//lets get the list of date fields..
 	foreach($fields as $field_index => $field_data){
-		$input_type = DURC::$column_type_map[strtolower($field_data['data_type'])]['input_type'];
+		$input_type = DURCC::$column_type_map[strtolower($field_data['data_type'])]['input_type'];
 		if($input_type == 'datetime' || $input_type == 'date'){
 			$date_field[] = $field_data['column_name'];
 		}
 	}
 
 	if(count($date_fields) > 0){
-		$date_code = "//DURC detected the following date fields\n\t\tprotected \$dates = [\n";
+		$date_code = "//DURCC detected the following date fields\n\t\tprotected \$dates = [\n";
 
 		foreach($date_fields as $this_date_field){
 			$date_code .= "\t\t\t$this_date_field,";
@@ -335,9 +335,9 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
 
 		$date_code .= "\t\t];";
 	}else{
-		$date_code = "//DURC did not detect any date fields";
+		$date_code = "//DURCC did not detect any date fields";
 	}
-		//STARTING DURC Parent CLASS
+		//STARTING DURCC Parent CLASS
 
 	if(false){ //Owen It is abandonded for php 8 
 		$audit_use_statement = ' use \Owen It\Auditing\Auditable; // configured using is_auditable = 1 in config json';
@@ -350,15 +350,15 @@ class LaravelEloquentGenerator extends \ftrotter\DURCC\DURCGenerator {
 
 		$parent_class_code = "<?php
 
-namespace $model_namespace\DURC\Models;
+namespace $model_namespace\DURCC\Models;
 $soft_delete_code_use_statememt
-use ftrotter\DURCC\DURCModel;
-use ftrotter\DURCC\DURC;
+use ftrotter\DURCCC\DURCCModel;
+use ftrotter\DURCCC\DURCC;
 //use Owen It\Auditing\Contracts\Auditable;
 /*
 	Note this class was auto-generated from 
 
-$database.$table by DURC.
+$database.$table by DURCC.
 
 	This class will be overwritten during future auto-generation runs..
 	Itjust reflects whatever is in the database..
@@ -367,7 +367,7 @@ $database.$table by DURC.
 
 */
 
-class $parent_class_name extends DURCModel $audit_implements{
+class $parent_class_name extends DURCCModel $audit_implements{
 
 	$audit_use_statement
 
@@ -377,7 +377,7 @@ class $parent_class_name extends DURCModel $audit_implements{
         // the datbase for this model
         protected \$table = '$database.$table';
 
-	//DURC will dymanically copy these into the \$with variable... which prevents recursion problem: https://laracasts.com/discuss/channels/eloquent/eager-load-deep-recursion-problem?page=1
+	//DURCC will dymanically copy these into the \$with variable... which prevents recursion problem: https://laracasts.com/discuss/channels/eloquent/eager-load-deep-recursion-problem?page=1
 	$with_code
 
 	$date_code
@@ -442,7 +442,7 @@ class $parent_class_name extends DURCModel $audit_implements{
     //everything is fillable by default
     protected \$guarded = [];
 		
-    // These are validation rules used by the DURCModel parent to validate data before storage
+    // These are validation rules used by the DURCCModel parent to validate data before storage
     protected static \$rules = [\n";
     foreach($fields as $field_index => $field_data) {
         // If the field's field type has an associated rule, add it here
@@ -481,12 +481,12 @@ namespace $model_namespace;
 /*
 	$class_name: controls $database.$table
 
-This class started life as a DURC model, but itwill no longer be overwritten by the generator
+This class started life as a DURCC model, but itwill no longer be overwritten by the generator
 this is safe to edit.
 
 
 */
-class $class_name extends \\$model_namespace\DURC\Models\\$parent_class_name
+class $class_name extends \\$model_namespace\DURCC\Models\\$parent_class_name
 {
 	//this controls what is downloaded in the json for this object under card_body.. 
 	//this function returns the html snippet that should be loaded for the summary of this object in a bootstrap card
@@ -518,7 +518,7 @@ class $class_name extends \\$model_namespace\DURC\Models\\$parent_class_name
 ";
 
 
-	$child_class_code .= "\n//DURC HAS_MANY SECTION\n";
+	$child_class_code .= "\n//DURCC HAS_MANY SECTION\n";
 	if(!is_null($has_many)){
 		foreach($has_many as $other_table_name => $relate_details){
 
@@ -532,7 +532,7 @@ class $class_name extends \\$model_namespace\DURC\Models\\$parent_class_name
 
 			$child_class_code .= "
 /**
-*	DURC is handling the $other_table_name for this $class_name in $parent_class_name
+*	DURCC is handling the $other_table_name for this $class_name in $parent_class_name
 *       but you can extend or override the defaults by editing this function...
 */
 	public function $other_table_name(){
@@ -543,12 +543,12 @@ class $class_name extends \\$model_namespace\DURC\Models\\$parent_class_name
 
 		}
 	}else{
-		$child_class_code .= "\t\t\t//DURC did not detect any has_many relationships";
+		$child_class_code .= "\t\t\t//DURCC did not detect any has_many relationships";
 	}
 
 
 
-	$child_class_code .= "\n//DURC BELONGS_TO SECTION\n";
+	$child_class_code .= "\n//DURCC BELONGS_TO SECTION\n";
 	if(!is_null($belongs_to)){
 		foreach($belongs_to as $other_table_name => $relate_details){
 
@@ -562,7 +562,7 @@ class $class_name extends \\$model_namespace\DURC\Models\\$parent_class_name
 			if(!isset($used_functions[$other_table_name])){
 				$child_class_code .= "
 /**
-*	DURC is handling the $other_table_name for this $class_name in $parent_class_name
+*	DURCC is handling the $other_table_name for this $class_name in $parent_class_name
 *       but you can extend or override the defaults by editing this function...
 */
 	public function $other_table_name(){
@@ -573,7 +573,7 @@ class $class_name extends \\$model_namespace\DURC\Models\\$parent_class_name
 
 			}else{
 				$child_class_code .= "
-\t\t//DURC would have added $other_table_name but it was already used in has_many. 
+\t\t//DURCC would have added $other_table_name but it was already used in has_many. 
 \t\t//You will have to resolve these recursive relationships in your code.";
 
 
@@ -581,7 +581,7 @@ class $class_name extends \\$model_namespace\DURC\Models\\$parent_class_name
 
 		}
 	}else{
-		$child_class_code .= "\t\t\t//DURC did not detect any belongs_to relationships";
+		$child_class_code .= "\t\t\t//DURCC did not detect any belongs_to relationships";
 	}
 
 
@@ -591,7 +591,7 @@ $child_class_code .= "
 
 	//look in the parent class for the SQL used to generate the underlying table
 
-	//add fields here to entirely hide them in the default DURC web interface.
+	//add fields here to entirely hide them in the default DURCC web interface.
         public static \$UX_hidden_col = [
         ];
 
@@ -601,7 +601,7 @@ $child_class_code .= "
                 }
         }
 
-	//add fields here to make them view-only in the default DURC web interface
+	//add fields here to make them view-only in the default DURCC web interface
         public static \$UX_view_only_col = [
         ];
 
@@ -617,11 +617,11 @@ $child_class_code .= "
 }//end $class_name";
 
 		$app_path = base_path() . '/app/'; //we put the editable file in the main app directory where all of the others live..
-		$durc_app_path = base_path() . '/app/DURC/Models/'; //we put the auto-genertated parent classes in a directory above that..
+		$durc_app_path = base_path() . '/app/DURCC/Models/'; //we put the auto-genertated parent classes in a directory above that..
 
 		if(!is_dir($durc_app_path)){
 			if (!mkdir($durc_app_path, 0777, true)) {
-    				die("DURC needs to create the $durc_app_path directory... but it could not.. what if it already existed? What then?");
+    				die("DURCC needs to create the $durc_app_path directory... but it could not.. what if it already existed? What then?");
 			}
 		}
 

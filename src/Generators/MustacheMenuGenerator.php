@@ -3,21 +3,21 @@
 	This generateds the static mustache menu for each file..
 
 */
-namespace ftrotter\DURCC\Generators;
+namespace ftrotter\DURCCC\Generators;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\DB;
-use ftrotter\DURCC\DURC;
+use ftrotter\DURCCC\DURCC;
 
-class MustacheMenuGenerator extends \ftrotter\DURCC\DURCGenerator {
+class MustacheMenuGenerator extends \ftrotter\DURCCC\DURCCGenerator {
 
 
 	//so that we target the same file the whole time..
 	public static function getFile(){
-		$file_name = base_path()."/resources/views/DURC/durc_html.mustache";
+		$file_name = base_path()."/resources/views/DURCC/durc_html.mustache";
 		return($file_name);
 	}
 
@@ -34,14 +34,14 @@ class MustacheMenuGenerator extends \ftrotter\DURCC\DURCGenerator {
 		$header = '<!doctype html>
 <html lang="en">
   <head>
-    <!-- Generated from DURC/src/Generators/MustacheMenuGenerator.php  -->
+    <!-- Generated from DURCC/src/Generators/MustacheMenuGenerator.php  -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>DURC Dashboard</title>
+    <title>DURCC Dashboard</title>
 
     <!-- Bootstrap core CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -147,7 +147,7 @@ h1 {
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/Zermelo/DURC/">DURC <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/Zermelo/DURCC/">DURCC <span class="sr-only">(current)</span></a>
             </li>
           </ul>
         </div>
@@ -197,7 +197,7 @@ h1 {
 
 
 /*
-        This accepts the data for each table in the database that DURC is aware of..
+        This accepts the data for each table in the database that DURCC is aware of..
         and generates a Mustache Menu
 */
         public static function run_generator($data_for_gen){

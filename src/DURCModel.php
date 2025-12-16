@@ -1,6 +1,6 @@
 <?php
 
-namespace ftrotter\DURCC;
+namespace ftrotter\DURCCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -8,13 +8,13 @@ use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Validator;
-use ftrotter\DURCC\DURC;
+use ftrotter\DURCCC\DURCC;
 //use Owen It\Auditing\Contracts\Auditable;
 // Owen It is abandoned for php 8
 /*
-	This is where we put all of the functions that we want all DURC models to inherit
+	This is where we put all of the functions that we want all DURCC models to inherit
 */
-class DURCModel extends Model{
+class DURCCModel extends Model{
 
     /**
      * @var array Array mapping attribute keys to their DB types,
@@ -64,13 +64,13 @@ class DURCModel extends Model{
     protected $non_nullable_fields = [];
 
     /**
-     * DURCModel constructor.
+     * DURCCModel constructor.
      * @param array $attributes
      *
      * Construct the model and build the validator, which will validate our models in the save() method
      *
      * Laravel (Eloquent) has a powerful built-in validation system without creating additional
-     * dependencies for DURC, so we take advantage of the built-in validator as much as possible so we
+     * dependencies for DURCC, so we take advantage of the built-in validator as much as possible so we
      * can catch most errors before they reach the database and display them to the user in the form
      * of error messages.
      */
@@ -111,7 +111,7 @@ class DURCModel extends Model{
 		}
 */
        } else {
-            $messsage = "DURC could not save this ".get_class($this)." model because the data is invalid.\n\n";
+            $messsage = "DURCC could not save this ".get_class($this)." model because the data is invalid.\n\n";
             $messsage .= "Here is the data you tried to store:\n";
 
             foreach ($this->attributes as $key => $value) {
@@ -129,7 +129,7 @@ class DURCModel extends Model{
                    $messsage .= "    * $m\n";
                }
             }
-            throw new DURCInvalidDataException($messsage);
+            throw new DURCCInvalidDataException($messsage);
        }
     }
 
@@ -142,7 +142,7 @@ class DURCModel extends Model{
     {
         foreach ($this->attributes as $key => $value) {
             if (isset(static::$field_type_map[$key])) {
-                $this->attributes[$key] = DURC::formatForStorage($key, static::$field_type_map[$key], $value, $this);
+                $this->attributes[$key] = DURCC::formatForStorage($key, static::$field_type_map[$key], $value, $this);
             }
         }
     }
@@ -207,7 +207,7 @@ class DURCModel extends Model{
 	* 	But to typically avoid eager loading for index lists and such...
 	*/
 	public function fresh_with_relations(){
-		return($this->fresh($this->DURC_selfish_with));
+		return($this->fresh($this->DURCC_selfish_with));
 	}
 
 	public function isFieldNullable($field)
@@ -297,7 +297,7 @@ class DURCModel extends Model{
 $my_name
 	<ul class='list-group'>
 		<li class='list-group-item'>
-	<a href='/DURC/$my_durc_name/$my_id/' target='_blank'>edit</a>
+	<a href='/DURCC/$my_durc_name/$my_id/' target='_blank'>edit</a>
 		 </li>
 ";
 		foreach($urls_to_add as $label => $url){
@@ -347,7 +347,7 @@ $card_body .= "
 
 			//first use a field with 'name' in the string somewhere...
 			foreach($my_class::$field_type_map as $field => $field_type){
-				$input_type = DURC::$column_type_map[strtolower($field_type)]['input_type'];
+				$input_type = DURCC::$column_type_map[strtolower($field_type)]['input_type'];
 				if(strpos(strtolower($field),$this_stub) !== false && $input_type == 'text'){
 					//then this is the first 'name' field with a varchar type. This is the winner.
 					return($field);
@@ -358,7 +358,7 @@ $card_body .= "
 		//if we get here there are no fields called 'name'
 		//so lets do any varchar field type...
 		foreach($my_class::$field_type_map as $field => $field_type){
-			$input_type = DURC::$column_type_map[strtolower($field_type)]['input_type'];
+			$input_type = DURCC::$column_type_map[strtolower($field_type)]['input_type'];
 			if($input_type == 'text'){
 				//then this is the first text field on the
 				return($field);
@@ -367,7 +367,7 @@ $card_body .= "
 
 		//lets return an integer field, as long as its not an id...
 		foreach($my_class::$field_type_map as $field => $field_type){
-			$input_type = DURC::$column_type_map[strtolower($field_type)]['input_type'];
+			$input_type = DURCC::$column_type_map[strtolower($field_type)]['input_type'];
 			if($input_type == 'number' && !in_array($field,$hell_no)){
 				//then this is the first text field on the
 				return($field);
@@ -382,7 +382,7 @@ $card_body .= "
 
 		//lets return an datetime field, as long as its not an created_at or updated_at...
 		foreach($my_class::$field_type_map as $field => $field_type){
-			$input_type = DURC::$column_type_map[strtolower($field_type)]['input_type'];
+			$input_type = DURCC::$column_type_map[strtolower($field_type)]['input_type'];
 			if(in_array($input_type,$date_type)  && !in_array($field,$hell_no)){
 				//then this is the first text field on the
 				return($field);
@@ -407,7 +407,7 @@ $card_body .= "
 		if($result){
 			return($result);
 		}else{
-			die("DURC Model for $this_class_name could not get any reasonable field for a name.. check your $db_table table..");
+			die("DURCC Model for $this_class_name could not get any reasonable field for a name.. check your $db_table table..");
 		}
 	}
 
@@ -451,7 +451,7 @@ $card_body .= "
 
 			//first use a field with 'img_url' (etc) in the string somewhere...
 			foreach($my_class::$field_type_map as $field => $field_type){
-				$input_type = DURC::$column_type_map[strtolower($field_type)]['input_type'];
+				$input_type = DURCC::$column_type_map[strtolower($field_type)]['input_type'];
 				if(strpos(strtolower($field),$this_stub) !== false && $input_type == 'text'){
 					//then this is the first 'img_url' (etc) field with a varchar type. This is the winner.
 					return($field);
@@ -474,7 +474,7 @@ $card_body .= "
 		if($result){
 			return($result);
 		}else{
-			die("DURC Model for $this_class_name could not get any reasonable fields for searching.. check your $db_table table..");
+			die("DURCC Model for $this_class_name could not get any reasonable fields for searching.. check your $db_table table..");
 		}
 	}
 
@@ -509,7 +509,7 @@ $card_body .= "
 
 			//first use a field with 'name' in the string somewhere...
 			foreach($my_class::$field_type_map as $field => $field_type){
-				$input_type = DURC::$column_type_map[strtolower($field_type)]['input_type'];
+				$input_type = DURCC::$column_type_map[strtolower($field_type)]['input_type'];
 				if(strpos(strtolower($field),$this_stub) !== false && $input_type == 'text'){
 					//then this is the first 'name' field with a varchar type. This is the winner.
 					$return_me[] = $field;
@@ -524,7 +524,7 @@ $card_body .= "
 			//if we get here there are no fields called 'name'
 			//so lets do any varchar field type...
 			foreach($my_class::$field_type_map as $field => $field_type){
-				$input_type = DURC::$column_type_map[strtolower($field_type)]['input_type'];
+				$input_type = DURCC::$column_type_map[strtolower($field_type)]['input_type'];
 				if($input_type == 'text'){
 					//then this is the first text field on the
 					$return_me[] = $field;

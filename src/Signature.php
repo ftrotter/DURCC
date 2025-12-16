@@ -1,6 +1,6 @@
 <?php
 
-namespace ftrotter\DURCC;
+namespace ftrotter\DURCCC;
 
 class Signature{
 

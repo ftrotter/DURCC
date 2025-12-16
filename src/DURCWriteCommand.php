@@ -5,16 +5,16 @@
 
 
 */
-namespace ftrotter\DURCC;
+namespace ftrotter\DURCCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 
-class DURCWriteCommand extends Command{
+class DURCCWriteCommand extends Command{
 
-    protected $signature = 'DURC:write {--squash} {--relation_config_file=} {--setting_config_file=} {--URLroot=}';
-    protected $description = 'DURC:write generates Templates and Eloquent Classe, inferred from your DB structure';
+    protected $signature = 'DURCC:write {--squash} {--relation_config_file=} {--setting_config_file=} {--URLroot=}';
+    protected $description = 'DURCC:write generates Templates and Eloquent Classe, inferred from your DB structure';
 
     public function handle(){
 	//what does this do?
@@ -22,20 +22,20 @@ class DURCWriteCommand extends Command{
 	$is_debug = false;
 
 	$firstPhaseGenerators = [
-			'Eloquent Models' => 		'ftrotter\DURCC\Generators\LaravelEloquentGenerator',
+			'Eloquent Models' => 		'ftrotter\DURCCC\Generators\LaravelEloquentGenerator',
 		];
 
 	//second phase generators get the benifit of actually using the first-generation generators 
 	//in their results... 	
 	$secondPhaseGenerators = [
-			'Web Controllers' => 		'ftrotter\DURCC\Generators\LaravelControllerGenerator',
-			'Mustache Edit Views' =>	'ftrotter\DURCC\Generators\MustacheEditViewGenerator',
-			'Mustache Index Page' => 	'ftrotter\DURCC\Generators\MustacheIndexViewGenerator',
-			'Laravel Routes' => 		'ftrotter\DURCC\Generators\LaravelRouteGenerator',	
-			'Test Routes' =>		'ftrotter\DURCC\Generators\LaravelTestRouteGenerator',	
-			'Mustache Menu' => 		'ftrotter\DURCC\Generators\MustacheMenuGenerator',	
-			'MySQLDump' => 			'ftrotter\DURCC\Generators\MySQLDumpGenerator',	
-			'Zermelo Index' => 		'ftrotter\DURCC\Generators\ZermeloIndexGenerator',
+			'Web Controllers' => 		'ftrotter\DURCCC\Generators\LaravelControllerGenerator',
+			'Mustache Edit Views' =>	'ftrotter\DURCCC\Generators\MustacheEditViewGenerator',
+			'Mustache Index Page' => 	'ftrotter\DURCCC\Generators\MustacheIndexViewGenerator',
+			'Laravel Routes' => 		'ftrotter\DURCCC\Generators\LaravelRouteGenerator',	
+			'Test Routes' =>		'ftrotter\DURCCC\Generators\LaravelTestRouteGenerator',	
+			'Mustache Menu' => 		'ftrotter\DURCCC\Generators\MustacheMenuGenerator',	
+			'MySQLDump' => 			'ftrotter\DURCCC\Generators\MySQLDumpGenerator',	
+			'Zermelo Index' => 		'ftrotter\DURCCC\Generators\ZermeloIndexGenerator',
 
 		];
 
@@ -43,13 +43,13 @@ class DURCWriteCommand extends Command{
 	$relation_config_file = $this->option('relation_config_file');
 
 	if(!$relation_config_file){ //this option is not typically used... this is where things are saved by default...
-		$relation_config_file = base_path()."/config/DURC_relation_config.edit_me.json"; //this is the user edited default config file..
+		$relation_config_file = base_path()."/config/DURCC_relation_config.edit_me.json"; //this is the user edited default config file..
 	}
 
 	$settings_config_file = $this->option('setting_config_file');
 
 	if(!$settings_config_file){ //this option is not typically used... this is where things are saved by default...
-		$settings_config_file = base_path()."/config/DURC_setting_config.json"; //this is the user edited default config file..
+		$settings_config_file = base_path()."/config/DURCC_setting_config.json"; //this is the user edited default config file..
 	}
 
 
@@ -57,17 +57,17 @@ class DURCWriteCommand extends Command{
 
 	$URLroot = $this->option('URLroot');
 	if(is_null($URLroot)){
-		$URLroot = '/DURC/';
+		$URLroot = '/DURCC/';
 	}
 
 	if($squash){
-		echo "DURC:write Beginning code generation! Squashing all previous code generation \n";	
+		echo "DURCC:write Beginning code generation! Squashing all previous code generation \n";	
 	}else{
-		echo "DURC:write Beginning code generation!\n";
+		echo "DURCC:write Beginning code generation!\n";
 	}
 
-	$relation_config = DURC::readDURCConfigJSON($relation_config_file);
-	$settings_config = DURC::readDURCConfigJSON($settings_config_file);
+	$relation_config = DURCC::readDURCCConfigJSON($relation_config_file);
+	$settings_config = DURCC::readDURCCConfigJSON($settings_config_file);
 
 
 	//each generator handles the creation of different type of file...
@@ -90,10 +90,10 @@ class DURCWriteCommand extends Command{
 		echo "Phase 2: Finished $generator_label... \n";	
 	}
 
-	echo "DURC:write all done.\n";
+	echo "DURCC:write all done.\n";
 
-//	$has_many_struct = DURC::getHasMany($db_struct);
-//	$belongs_to_struct = DURC::getHasMany($db_struct);
+//	$has_many_struct = DURCC::getHasMany($db_struct);
+//	$belongs_to_struct = DURCC::getHasMany($db_struct);
 	
     }
 
@@ -102,7 +102,7 @@ class DURCWriteCommand extends Command{
 
 		$squash = true; //TODO where should this come from???
 					//why it missing... wtf is going on?
-		$URLroot = '/DURC/';
+		$URLroot = '/DURCC/';
 		$this_generator::start($relation_config,$squash,$URLroot);
 
 		foreach($relation_config as $this_db => $db_data){

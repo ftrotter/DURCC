@@ -1,8 +1,8 @@
 <?php
 
-namespace ftrotter\DURCC;
+namespace ftrotter\DURCCC;
 
-class DURCInvalidDataException extends \Exception
+class DURCCInvalidDataException extends \Exception
 {
 
 }

@@ -1,6 +1,6 @@
 {
     "name": "ftrotter/durcc",
-    "description": "DURC is reverse CRUD",
+    "description": "DURCC is reverse CRUD",
     "type": "library",
     "license": "MIT",
      "keywords": [

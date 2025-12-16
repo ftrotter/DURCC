@@ -1,11 +1,11 @@
 <?php
-namespace ftrotter\DURCC;
+namespace ftrotter\DURCCC;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\DB;
-use ftrotter\DURCC\DURC;
+use ftrotter\DURCCC\DURCC;
 /*
 	All of the mostache generators will need shared functions.
 	Ways to generate basic html components, using bootstrap
@@ -13,7 +13,7 @@ use ftrotter\DURCC\DURC;
 	This class hosts those shared functions...
 
 */
-class DURCMustacheGenerator extends DURCGenerator {
+class DURCCMustacheGenerator extends DURCCGenerator {
 
     public static function start(
         $db_config,
@@ -44,7 +44,7 @@ class DURCMustacheGenerator extends DURCGenerator {
 		$foreign_db = $field_data['foreign_db'];
 		$foreign_table = $field_data['foreign_table'];
 
-		$input_type = DURC::mapColumnDataTypeToInputType( $data_type, $column_name );
+		$input_type = DURCC::mapColumnDataTypeToInputType( $data_type, $column_name );
 
 		switch($input_type){
             		case 'boolean':
@@ -356,7 +356,7 @@ class DURCMustacheGenerator extends DURCGenerator {
 		$code_mode_cdn_html = '';
 		$right_code_mode = '';
 		$matching_code_mode = '';
-	        foreach(DURC::$code_language_map as $this_code_stub => $this_code_mode){
+	        foreach(DURCC::$code_language_map as $this_code_stub => $this_code_mode){
 
               		$this_code_string = "_$this_code_stub"."_code";
 

@@ -2,11 +2,11 @@
 /*
 	Generates a mysql dump of the schema for each table..
 */
-namespace ftrotter\DURCC\Generators;
+namespace ftrotter\DURCCC\Generators;
 
-use ftrotter\DURCC\DURC;
+use ftrotter\DURCCC\DURCC;
 
-class MySQLDumpGenerator extends \ftrotter\DURCC\DURCGenerator {
+class MySQLDumpGenerator extends \ftrotter\DURCCC\DURCCGenerator {
 
 
         //Run only once at the end of generation
@@ -27,7 +27,7 @@ class MySQLDumpGenerator extends \ftrotter\DURCC\DURCGenerator {
 	}//end start
 
 /*
-        This accepts the data for each table in the database that DURC is aware of..
+        This accepts the data for each table in the database that DURCC is aware of..
 	and makes a mysql dump of the schema of the underlying table..
 */
         public static function run_generator($data_for_gen){
@@ -40,7 +40,7 @@ class MySQLDumpGenerator extends \ftrotter\DURCC\DURCGenerator {
 		$password = \Config::get('database.connections.mysql.password');
 
 		if($user && $password){
-			$path = base_path("app/DURC/SQL_schemas");	
+			$path = base_path("app/DURCC/SQL_schemas");	
 			if(!is_dir($path)){	//if the directory does not exist..
 				$old = umask(0);
 				mkdir($path,0744); //make it...
